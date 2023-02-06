@@ -2,6 +2,17 @@
 <html lang="en">
     <%- include("./partials/head") %>
 <body>
-
+    <div class="container"></div>
+    <h1>suggest a new song.</h1>
+    <form action="/musicspace" method="POST">
+        song title:<br>
+        <input type="text" name="songTitle"><br><br>
+        artist:<br>
+        <input type="text" name="artist"><br><br>
+        genre:<br>
+        <input type="text" name="genre"><br><br>
+        <input button="button" type="submit" value="suggest away...">
+    </form>
+    </div>
 </body>
 </html>

@@ -2,6 +2,22 @@
 <html lang="en">
     <%- include("./partials/head") %>
 <body>
-
+    <nav>
+        <a href="/musicspace/new">Add a New Song</a>
+    </nav>
+    <h1>my queue</h1>
+    <ul>
+        <% songs.forEach(songs => { %>
+            <li>
+                <a href="/musicspace/<%= songs._id %>">
+                    <%= songs.artist %>
+                </a>
+                <form action="/musicspace/<%= songs._id %>?_method=DELETE" method="POST">
+                    <input type="submit" value="DELETE">
+                </form>
+                <a href="/musicspace/<%= songs._id %>/edit">Edit</a>
+            </li>
+        <% }); %>
+    </ul>
 </body>
 </html>

@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const Songs = require('./models/music.js');
+const Songs = require('./models/songs.js');
 //const methodOverride = require('method-override');
 
 require('dotenv').config(); // looks for a .env file and makes it's vars available to process.env
@@ -22,15 +22,25 @@ db.on('error', (err) => {
     console.log('An error occurred with MongoDB: ' + err.message);
 });
 
+const data = require('./data');
+
+app.get('/musicspace/seed', (req, res) => {
+    Songs.deleteMany({}, (err, results) => {
+        Songs.create(data, (err, Songs) => {
+            res.redirect('/musicspace');
+        });
+    });
+});
+
 //Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 //app.use(methodOverride('_method'));
 
-//INDEXnod
+//INDEX
 app.get('/musicspace/', (req, res) => {
     res.render('index.ejs', {
-        allSongs : Songs
+        Songs : Songs
     });
 });
 
@@ -59,7 +69,7 @@ app.get('/musicspace/', (req, res) => {
 
 //EDIT
 app.get('/musicspace/:index/edit', (req, res) => {
-    res.render('edit.ejs', { allSongs : Songs[req.params.index], index: req.params.index});
+    res.render('edit.ejs', { Songs : Songs[req.params.index], index: req.params.index});
 });
 
 //SHOW

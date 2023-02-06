@@ -5,11 +5,11 @@
 
 </body>
 <h1>Edit Book</h1>
-<form action="/musicspace/<%= book._id %>?_method=PUT" method="POST">
-    Song Title: <input type="text" name="title" value="<%= musicspace.songTitle %>">
-    Artist: <input type="text" name="author" value="<%= musicspace.artist %>">
-    Genre: <input type="text" name="genre" value="<%= musicspace.genre %>"
-    Completed: <input type="checkbox" name="completed" <% if (musicspace.completed) {%> checked <%}%>>
-    <input type="submit" value="Update Book">
+<form action="/musicspace/<%= songs._id %>?_method=PUT" method="POST">
+    Song Title: <input type="text" name="songTitle" value="<%= songs.songTitle %>">
+    Artist: <input type="text" name="author" value="<%= songs.artist %>">
+    Genre: <input type="text" name="genre" value="<%= songs.genre %>"
+    
+    <input type="submit" value="update song">
 </form>
 </html>

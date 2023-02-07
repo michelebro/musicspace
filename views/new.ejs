@@ -2,19 +2,21 @@
 <html lang="en">
     <%- include("./partials/head") %>
 <body>
-    <div class="container"></div>
+    <nav>
+        <a href="/musicspace">return to playlist</a>
+    </nav>
     <h1>suggest a new song.</h1>
+
     <form action="/musicspace" method="POST">
-        song title:<br>
+        <b>song <title class=""></title></b><br>
         <input type="text" name="songTitle"><br><br>
-        artist:<br>
+        <b>artist.</b><br>
         <input type="text" name="artist"><br><br>
-        genre:<br>
+        <b>genre.</b><br>
         <input type="text" name="genre"><br><br>
-        link to song:<br>
+        <b>link to song.</b><br>
         <input type="text" name="spotifyLink"><br><br>
-        <input button="button" type="submit" value="suggest away...">
+        <input button="button" type="submit" value="suggest away..." class="Btn">
     </form>
-    </div>
 </body>
 </html>

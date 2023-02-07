@@ -2,15 +2,22 @@
 <html lang="en">
     <%- include("./partials/head") %>
 <body>
-
-</body>
+    <nav>
+        <a href="/musicspace">return to playlist</a> |
+        <a href="/musicspace/new">add a new song</a>
+    </nav>
 <h1>edit song</h1>
 <form action="/musicspace/<%= songs._id %>?_method=PUT" method="POST">
-    Song Title: <input type="text" name="songTitle" value="<%= songs.songTitle %>">
-    Artist: <input type="text" name="author" value="<%= songs.artist %>">
-    Genre: <input type="text" name="genre" value="<%= songs.genre %>">
+    <b>song title.</b><br>
+        <input type="text" name="songTitle" value="<%= songs.songTitle %>"><br><br>
+    <b>artist.</b><br>
+        <input type="text" name="author" value="<%= songs.artist %>"><br><br>
+    <b>genre.</b><br>
+        <input type="text" name="genre" value="<%= songs.genre %>"><br><br>
+    <b>link to song.</b><br>
+         <input type="text" name="spotifyLink" value="<%= songs.spotifyLink %>"><br><br>
     
-    <input type="submit" value="update song">
+    <input type="submit" value="update song" class="Btn">
 </body>
 </form>
 </html>

@@ -5,10 +5,11 @@
     <nav>
         <a href="/musicspace">back to playlist.</a>
     </nav>
+    <div>
     <h1><%= songs.songTitle %></h1>
     <p><b>artist.</b> <%= songs.artist %></p>
     <p><b>genre.</b> <%= songs.genre %></p>
-    <p><b>song</b> <a href="<%= songs.spotifyLink %>" target=”_blank” >link.</a></p>
+    <p><b>play</b> <a href="<%= songs.spotifyLink %>" target=”_blank” >song.</a></p>
 
     <label>
         <b>whats your rating.</label></b>
@@ -21,7 +22,8 @@
         </select>
     </label>
     
-    <input type="submit" value="add your rating">
+    <input type="submit" value="add your rating" class="Btn">
+    </div>
 </form>
 
 </body>

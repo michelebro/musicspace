@@ -57,6 +57,7 @@ app.delete('/musicspace/:id', (req, res) => {
         res.redirect('/musicspace');
     });
 });
+
 //UPDATE
 app.put('/musicspace/:id/', (req, res) => {
     if(req.body.completed === 'on') {
@@ -76,9 +77,8 @@ app.post('/musicspace', (req, res) => {
     } else {
         req.body.completed = false;
     }
-
     Song.create(req.body, (err, createdSong) => {
-        res.redirect('/musicspace'); // redirect to the books index page
+        res.redirect('/musicspace');
     });
 });
 
@@ -101,14 +101,14 @@ app.get('/musicspace/:id', (req, res) => {
 });
 
 //Rate
-app.post('/musicspace/:id/ratings', (req, res) => {
-    Song.findById(req.params.id, (err, song) => {
-        song.ratings.push(req.body);
-        song.save((err) => {
-            res.redirect('/musicspace/' + song._id);
-        });
-    });
-});
+// app.post('/musicspace/:id/ratings', (req, res) => {
+//     Song.findById(req.params.id, (err, song) => {
+//         song.ratings.push(req.body);
+//         song.save((err) => {
+//             res.redirect('/musicspace/' + song._id);
+//         });
+//     });
+// });
 
 
 //LISTEN

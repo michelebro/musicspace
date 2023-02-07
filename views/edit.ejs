@@ -4,12 +4,13 @@
 <body>
 
 </body>
-<h1>Edit Book</h1>
+<h1>edit song</h1>
 <form action="/musicspace/<%= songs._id %>?_method=PUT" method="POST">
     Song Title: <input type="text" name="songTitle" value="<%= songs.songTitle %>">
     Artist: <input type="text" name="author" value="<%= songs.artist %>">
     Genre: <input type="text" name="genre" value="<%= songs.genre %>"
     
     <input type="submit" value="update song">
+</body>
 </form>
 </html>

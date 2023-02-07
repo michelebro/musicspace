@@ -6,8 +6,23 @@
         <a href="/musicspace">back to playlist.</a>
     </nav>
     <h1><%= songs.songTitle %></h1>
-    <p>artist. <%= songs.artist %></p>
-    <p>genre. <%= songs.genre %></p>
+    <p><b>artist.</b> <%= songs.artist %></p>
+    <p><b>genre.</b> <%= songs.genre %></p>
+    <p><b>song</b> <a href="<%= songs.spotifyLink %>" target=”_blank” >link.</a></p>
+
+    <label>
+        <b>whats your rating.</label></b>
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </label>
+    
+    <input type="submit" value="add your rating">
+</form>
 
 </body>
 </html>

@@ -3,19 +3,19 @@
     <%- include("./partials/head") %>
 <body>
     <nav>
-        <a href="/musicspace/new">Add a New Song</a>
+        <a href="/musicspace/new">add a new song</a>
     </nav>
     <h1>my queue</h1>
-    <ul>
+    <ul> 
         <% songs.forEach(songs => { %>
             <li>
                 <a href="/musicspace/<%= songs._id %>">
                     <%= songs.artist %>
                 </a>
                 <form action="/musicspace/<%= songs._id %>?_method=DELETE" method="POST">
-                    <input type="submit" value="DELETE">
+                    <input type="submit" value="delete">
                 </form>
-                <a href="/musicspace/<%= songs._id %>/edit">Edit</a>
+                <a href="/musicspace/<%= songs._id %>/edit"><button>edit</button></a>
             </li>
         <% }); %>
     </ul>

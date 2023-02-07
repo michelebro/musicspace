@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const songsSchema = new Schema({
-  songTitle: { type: String, required: true },
-  artist: { type: String, required: true },
-  genre: { type: String, required: true },
-});
-
 const ratingSchema = new Schema({
   rating: {
       type: Number,
@@ -16,5 +10,14 @@ const ratingSchema = new Schema({
   },
 }, { timestamps: true });
 
-const songs = mongoose.model('songs', songsSchema);
-  module.exports = mongoose.model('songs', songsSchema);
+const songsSchema = new Schema({
+  songTitle: { type: String, required: true },
+  artist: { type: String, required: true },
+  genre: { type: String, required: true },
+  //completed: Boolean,
+  //ratings: [ratingSchema],
+  spotifyLink: { type: String, required: true },
+});
+
+// const songs = mongoose.model('songs', songsSchema);
+  module.exports = mongoose.model('Song', songsSchema);

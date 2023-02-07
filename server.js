@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const Songs = require('./models/songs.js');
-//const methodOverride = require('method-override');
+const Song = require('./models/songs.js');
+const methodOverride = require('method-override');
 
-require('dotenv').config(); // looks for a .env file and makes it's vars available to process.env
+require('dotenv').config();
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -25,22 +25,24 @@ db.on('error', (err) => {
 const data = require('./data');
 
 app.get('/musicspace/seed', (req, res) => {
-    Songs.deleteMany({}, (err, results) => {
-        Songs.create(data, (err, Songs) => {
+    Song.deleteMany({}, (err, results) => {
+        Song.create(data, (err, Songs) => {
             res.redirect('/musicspace');
         });
-    });
+    });  
 });
 
 //Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
-//app.use(methodOverride('_method'));
+app.use(methodOverride('_method'));
 
 //INDEX
-app.get('/musicspace/', (req, res) => {
-    res.render('index.ejs', {
-        Songs : Songs
+app.get('/musicspace', (req, res) => {
+    Song.find({}, (err, allSongs) => {
+        res.render('index.ejs', {
+            songs : allSongs
+        });
     });
 });
 
@@ -50,32 +52,64 @@ app.get('/musicspace/new',(req, res) => {
 });
 
 //DELETE
-app.delete('/musicspace/:index', (req,res) => {
-    MusicSpace.splice(req.params.index, 1);
-    res.redirect('/musicspace');
+app.delete('/musicspace/:id', (req, res) => {
+    Song.findByIdAndDelete(req.params.id, (err, deletedSong) => {
+        res.redirect('/musicspace');
+    });
 });
-
 //UPDATE
-app.put('/musicspace/:index/', (req, res) => {
-    MusicSpace[req.params.index] = req.body;
-    res.redirect('/musicspace');
+app.put('/musicspace/:id/', (req, res) => {
+    if(req.body.completed === 'on') {
+        req.body.completed = true;
+    } else {
+        req.body.completed = false;
+    }
+    Song.findByIdAndUpdate(req.params.id, req.body, (err, Songs) => {
+        res.redirect('/musicspace');
+    });
 });
 
 //CREATE
-app.get('/musicspace/', (req, res) => {
-    MusicSpace.push(req.body);
-    res.redirect('/musicspace');
+app.post('/musicspace', (req, res) => {
+    if(req.body.completed === "on") {
+        req.body.completed = true;
+    } else {
+        req.body.completed = false;
+    }
+
+    Song.create(req.body, (err, createdSong) => {
+        res.redirect('/musicspace'); // redirect to the books index page
+    });
 });
 
 //EDIT
-app.get('/musicspace/:index/edit', (req, res) => {
-    res.render('edit.ejs', { Songs : Songs[req.params.index], index: req.params.index});
+app.get('/musicspace/:id/edit', (req, res) => {
+    Song.findById(req.params.id, (err, foundSong) => {
+        res.render('edit.ejs', {
+            songs : foundSong
+        });
+    });
 });
 
 //SHOW
-app.get('/musicspace/:index', (req, res) => {
-    res.render('show.ejs', { Songs : Songs[req.params.index]});
+app.get('/musicspace/:id', (req, res) => {
+    Song.findById(req.params.id, (err, foundSong) => {
+        res.render('show.ejs', {
+            songs : foundSong
+        });
+    });
 });
+
+//Rate
+app.post('/musicspace/:id/ratings', (req, res) => {
+    Song.findById(req.params.id, (err, song) => {
+        song.ratings.push(req.body);
+        song.save((err) => {
+            res.redirect('/musicspace/' + song._id);
+        });
+    });
+});
+
 
 //LISTEN
 app.listen(PORT, () => {

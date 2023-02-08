@@ -8,7 +8,6 @@ A web application where the users can go to find, as well as share new music the
 <li>Node.js</li>
 <li>Mongoose</li>
 <li>MongoDB</li>
-<li>JavaScript</li>
 <li>CSS3</li>
 <li>EJS</li>
 <li>Express</li>
